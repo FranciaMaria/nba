@@ -8,6 +8,11 @@ use App\Player;
 
 class TeamsController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+    
     public function index(){
 
     	$teams = Team::getPublishedTeams();

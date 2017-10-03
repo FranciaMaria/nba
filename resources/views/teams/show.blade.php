@@ -4,6 +4,7 @@
 	<title>{{$team->name}}</title>
 </head>
 <body>
+    
 	<h1>{{$team->name}}</h1>
 
 	<p><strong>Email: </strong>{{$team->email}}</p>

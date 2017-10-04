@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Comment;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -27,5 +29,18 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function comments(){
+
+        return $this->hasMany(\App\Comment::class);
+    }
+
+    /*public function addComment($comment){
+        
+        $this->comments()->create(compact('comment'));
+    }*/
+    /*public function publish(Comment $comment){
+        $this->comments()->save($comments);
+    }*/
+    
      
 }

@@ -1,5 +1,7 @@
 <?php
-
+use App\Team;
+use App\Player;
+use App\Comment;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,5 +30,7 @@ Route::get('/{id}/', 'TeamsController@show');
 Route::get('/player/{id}', 'PlayersController@show');
 
 Route::get('/teams/{id}', 'TeamsController@show');
+
+Route::post('/teams/{team}/comments', 'CommentsController@store');
 
 

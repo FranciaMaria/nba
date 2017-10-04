@@ -38,5 +38,67 @@
         </ol>
 
     @endif
+
+     @if(count($team->comments))
+
+        <hr/>
+
+        <h4>Comments:</h4>
+
+        <ul class="list-unstyled">
+
+            @foreach($team->comments as $comment)
+
+                <li>
+
+                    <p>
+
+                        <strong>Author:</strong> {{ $comment->user->name }}
+
+                    </p>
+
+                    <p>
+
+                        <strong>Created at:</strong> {{ $comment->created_at }}
+
+                    </p>
+
+                    <p>
+
+                        {{ $comment->content }}
+
+                    </p>
+
+                </li>
+
+            @endforeach
+
+        </ul>
+
+    @endif
+
+      <form method="POST" action="/teams/{{$team->id}}/comments">
+
+        {{ csrf_field() }}
+
+        <div class="form-group">
+
+            <label for="content">Comment:</label><br>
+            <textarea class="form-control" id="content" name="content"></textarea>
+
+            @include('partials.error-message', ['fieldTitle' => 'content'])
+
+        </div>
+
+        <div class="form-group">
+
+            <button type="submit" class="btn btn-primary">Post</button>
+
+        </div>
+
+    </form>
+
+
+
 </body>
 </html>

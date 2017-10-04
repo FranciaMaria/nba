@@ -4,7 +4,6 @@
     <title>Login</title>
 </head>
 <body>
-
     <h2 class="blog-post-title">Login</h2>
 
     <form method="POST" action="/login">

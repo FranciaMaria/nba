@@ -16,11 +16,11 @@ class Comment extends Model
 
     public function team(){
 
-    	return $this->belongsTo(\App\Team::class);
+    	return $this->belongsTo(\App\Team::class, 'team_id');
     }
 
     public function user(){
 
-    	return $this->belongsTo(\App\User::class);
+    	return $this->belongsTo(\App\User::class, 'user_id');
     }
 }

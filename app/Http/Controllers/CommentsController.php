@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 use App\Team;
@@ -23,16 +23,21 @@ class CommentsController extends Controller
     		'team_id' => 'required',
     	]);
 
-        $comment = Comment::create([
+       /* $user = auth()->id();
 
-            'content' => request('content'),
-            'user_id' => auth()->id(),
-            'team_is' => $team->id,
+        $team->addComment(request('content'))->with('user')->get();
 
-        ]);
+        $user->publish(request('content'))->with('team')->get();*/
 
+        //$team = Video::find(Input::get('team_id')) ;
 
-        $team->addComment($comment);
+        $comment = new Comment;
+        $comment->content = request('content');
+        $comment->user()->associate(Auth::user());
+        $comment->team()->associate($team->id);
+        //$comment->save();
+
+        $team->addComment(compact('comment'));
         
     	return back();
     }

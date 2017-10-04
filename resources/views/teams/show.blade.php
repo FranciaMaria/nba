@@ -77,13 +77,15 @@
 
     @endif
 
+    <h2>Add a comment</h2>
+
       <form method="POST" action="/teams/{{$team->id}}/comments">
 
         {{ csrf_field() }}
 
         <div class="form-group">
 
-            <label for="content">Comment:</label><br>
+            <label for="content">Comment content:</label><br>
             <textarea class="form-control" id="content" name="content"></textarea>
 
             @include('partials.error-message', ['fieldTitle' => 'content'])
@@ -92,11 +94,12 @@
 
         <div class="form-group">
 
-            <button type="submit" class="btn btn-primary">Post</button>
+            <button type="submit" class="btn btn-primary">Add</button>
 
         </div>
 
-    </form>
+      </form>
+
 
 
 

@@ -38,9 +38,10 @@ class User extends Authenticatable
         
         $this->comments()->create(compact('comment'));
     }*/
-    /*public function publish(Comment $comment){
-        $this->comments()->save($comments);
-    }*/
+    public function publish($content){
+        
+        $this->comments()->create(compact('content'));
+    }
     
      
 }

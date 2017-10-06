@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
+
 class SessionsController extends Controller
 {
     public function __construct()
@@ -11,9 +13,22 @@ class SessionsController extends Controller
         $this->middleware('guest', ['except' => ['destroy']]);
     }
 
+
+    public function verify($id){
+
+        $user = User::find($id);
+
+        $user->is_verified = true;
+        $user->save();
+
+        return store();
+
+    }
+
 	public function create()
 	{
-		return view('login.create');
+		return view('login.create');		
+		
 	}
 
 	public function store()
@@ -21,12 +36,10 @@ class SessionsController extends Controller
 		if (!auth()->attempt(
 				request(['email', 'password'])
 			)) {
-
 			return back()->withErrors([
 				'message' => 'Bad credentials. Please try again'
 			]);
 		}
-
 		return redirect('/');
 	}
 

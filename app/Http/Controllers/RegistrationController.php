@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EmailVerification;
 
 class RegistrationController extends Controller
 {
@@ -21,7 +23,7 @@ class RegistrationController extends Controller
 
     protected function store(Request $request){
 
-    	$request->validate([
+    	$validator = $request->validate([
 
     		'name' => 'required',
             'email' => 'required | string | email | max:255',
@@ -30,16 +32,31 @@ class RegistrationController extends Controller
             
     	]);
 
-    	$user = User::create([
+        $user = User::create([
 
-    		'name' => $request->get('name'),
-    		'email' => $request->get('email'),
-    		'password' => bcrypt($request->get('password'))
-    	]);
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'password' => bcrypt($request->get('password')),
+            'is_verified' => false
+        ]);
 
-    	auth()->login($user);
+        if($user->is_verified === false){
 
-    	return redirect('/');
+
+                session()->flash('message', "Pogledati mail...");
+                Mail::to($user->email)->send(new EmailVerification($user));
+                
+                
+        }  
+
+        return redirect('/login');   
+
+    	
+
+    	/*auth()->login($user);
+
+    	return redirect('/');*/
 
     }
+
 }

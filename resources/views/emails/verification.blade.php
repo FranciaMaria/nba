@@ -1,0 +1,1 @@
+<h2>Verify your datas on <a href="http://127.0.0.1:8000/login/{{$user->id}}/verify"> this link</a></h2>

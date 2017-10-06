@@ -8,7 +8,7 @@ use User;
 
 class Comment extends Model
 {
-    protected $guarded = ['id'];
+   // protected $guarded = ['id'];
 
     protected $fillable = ['content', 'user_id', 'team_id'];
 

@@ -21,7 +21,9 @@ class SessionsController extends Controller
         $user->is_verified = true;
         $user->save();
 
-        return store();
+        auth()->login();
+
+        return redirect('/');
 
     }
 
@@ -33,13 +35,15 @@ class SessionsController extends Controller
 
 	public function store()
 	{
-		if (!auth()->attempt(
+		if(User::where('email', request('email'))->first()->is_verified){
+			if (!auth()->attempt(
 				request(['email', 'password'])
 			)) {
 			return back()->withErrors([
 				'message' => 'Bad credentials. Please try again'
 			]);
 		}
+	}
 		return redirect('/');
 	}
 

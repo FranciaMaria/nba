@@ -22,11 +22,7 @@ class Team extends Model
 
     public function comments(){
 
-    	return $this->hasMany(\App\Comment::class);
-    }
-
-    public function addComment(Comment $comment){
-        $this->comments()->create(compact('comment'));
+    	return $this->hasMany(\App\Comment::class); 
     }
 
 }

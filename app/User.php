@@ -28,20 +28,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    public function comments(){
-
-        return $this->hasMany(\App\Comment::class);
-    }
-
-    /*public function addComment($comment){
-        
-        $this->comments()->create(compact('comment'));
-    }*/
-    public function publish($content){
-        
-        $this->comments()->create(compact('content'));
-    }
-    
+   
      
 }
